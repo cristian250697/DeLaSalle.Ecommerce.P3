@@ -31,8 +31,8 @@ public class BrandRepository : IBrandRepository
     public async Task<List<Brand>> GetAllAsync()
     {
         const string sql = "SELECT *  FROM Brand WHERE IsDeleted = 0";
-        var categories = await _dbContext.Connection.QueryAsync<Brand>(sql);
-        return categories.ToList();
+        var brands = await _dbContext.Connection.QueryAsync<Brand>(sql);
+        return brands.ToList();
     }
 
     public async Task<bool> DeleteAsync(int id)

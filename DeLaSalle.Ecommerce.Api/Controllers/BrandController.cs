@@ -30,11 +30,11 @@ public class BrandController : Controller
     }
     
     [HttpPost]
-    public async Task<ActionResult<Response<Brand>>> Post([FromBody] Brand categoryDto)
+    public async Task<ActionResult<Response<Brand>>> Post([FromBody] Brand brand)
     {
         var response = new Response<Brand>
         {
-            Data = await _brandService.SaveAsync(categoryDto)
+            Data = await _brandService.SaveAsync(brand)
         };
         
         return Created($"/api/[controler]/{response.Data.Id}",response);
@@ -61,10 +61,10 @@ public class BrandController : Controller
     }
 
     [HttpPut]
-    public async Task<ActionResult<Response<Brand>>> Update([FromBody] Brand categoryDto)
+    public async Task<ActionResult<Response<Brand>>> Update([FromBody] Brand brand)
     {
         var response = new Response<Brand>();
-        bool exist = await _brandService.BrandExist(categoryDto.Id);
+        bool exist = await _brandService.BrandExist(brand.Id);
 
         if (!exist)
         {
@@ -72,7 +72,7 @@ public class BrandController : Controller
             return NotFound(response);
         }
 
-        response.Data = await _brandService.UpdateAsync(categoryDto);
+        response.Data = await _brandService.UpdateAsync(brand);
         return Ok(response);
         
     }
